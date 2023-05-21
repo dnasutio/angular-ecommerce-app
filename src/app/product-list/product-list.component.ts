@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { ProductsService } from "../products.service";
 
-import { products } from '../products';
+import { Product } from '../products';
 
 @Component({
   selector: 'app-product-list',
@@ -8,7 +9,13 @@ import { products } from '../products';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  products = products;
+  products: Product[] | undefined;
+
+  constructor(private productsService: ProductsService) {}
+
+  ngOnInit() {
+    this.get();
+  }
 
   share() {
     window.alert('The product has been shared!');
@@ -16,6 +23,13 @@ export class ProductListComponent {
 
   onNotify() {
     window.alert('You will be notified when the product goes on sale');
+  }
+
+  get() {
+    this.productsService.getProducts().subscribe(response => {
+        this.products = response.body;
+        console.log("body ", response.body);
+    });
   }
 }
 
