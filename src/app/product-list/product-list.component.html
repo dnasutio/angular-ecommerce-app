@@ -10,13 +10,13 @@ can be found in the LICENSE file at https://angular.io/license
   <h3>
     <a
       [title]="product.name + ' details'"
-      [routerLink]="['/products', product.id]"
+      [routerLink]="['/products', product._id]"
     >
       {{ product.name }}
     </a>
   </h3>
 
-  <p *ngIf="product.description">Description: {{ product.description }}</p>
+  <!-- <p *ngIf="product.description">Description: {{ product.description }}</p> -->
 
   <button type="button" (click)="share()">Share</button>
 

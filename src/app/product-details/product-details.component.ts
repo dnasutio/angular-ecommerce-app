@@ -33,12 +33,14 @@ export class ProductDetailsComponent {
 
             // First get the product id from the current route.
             const routeParams = this.route.snapshot.paramMap;
-            const productIdFromRoute = Number(routeParams.get('productId'));
-
+            console.log(routeParams)
+            const productIdFromRoute = String(routeParams.get('productId'));
+            console.log(productIdFromRoute)
             // Find the product that correspond with the id prodivided in route
             this.product = this.products.find(
-                (product) => product.id === productIdFromRoute
+                (product) => product._id === productIdFromRoute
             );
+            console.log(this.product)
         });
     }
 
