@@ -23,10 +23,10 @@ export class ProductDetailsComponent {
     ) { }
 
     ngOnInit() {
-        this.get();
+        this.getProduct();
     }
 
-    get() {
+    getProduct() {
         this.productsService.getProducts().subscribe(response => {
             this.products = response.body;
             console.log("body ", response.body);
