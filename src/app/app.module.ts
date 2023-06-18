@@ -17,7 +17,13 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+
+import { CreateComponent } from './create/create.component';
+import { ReadComponent } from './read/read.component';
+import { UpdateComponent } from './update/update.component';
+import { DeleteComponent } from './delete/delete.component'
+
 
 @NgModule({
   imports: [
@@ -29,6 +35,10 @@ import { MatButtonModule } from '@angular/material/button'
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
+      {path: 'create', component: CreateComponent},
+      {path: 'read', component: ReadComponent},
+      {path: 'update', component: UpdateComponent},
+      {path: 'delete', component: DeleteComponent}
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -36,7 +46,6 @@ import { MatButtonModule } from '@angular/material/button'
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    
   ],
   declarations: [
     AppComponent,
@@ -46,7 +55,11 @@ import { MatButtonModule } from '@angular/material/button'
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
+    CreateComponent,
+    ReadComponent,
+    UpdateComponent,
+    DeleteComponent,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
