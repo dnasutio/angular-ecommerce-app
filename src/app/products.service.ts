@@ -14,4 +14,8 @@ export class ProductsService {
     getProducts(): Observable<HttpResponse<any>> {
         return this.http.get("http://localhost:3000/products", { observe: 'response' });
     }
+
+    createProduct(product: Product): Observable<HttpResponse<any>> {
+        return this.http.post("http://localhost:3000/products", product, { observe: 'response' });
+    }
 }

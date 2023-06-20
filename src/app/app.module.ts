@@ -14,10 +14,10 @@ import { ShippingComponent } from './shipping/shipping.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatIconModule } from '@angular/material/icon'
 import { MatSidenavModule } from '@angular/material/sidenav'
-import { MatListModule } from '@angular/material/list'
 import { MatButtonModule } from '@angular/material/button';
+
+
 
 import { CreateComponent } from './create/create.component';
 import { ReadComponent } from './read/read.component';
@@ -35,16 +35,14 @@ import { DeleteComponent } from './delete/delete.component'
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
-      {path: 'create', component: CreateComponent},
-      {path: 'read', component: ReadComponent},
-      {path: 'update', component: UpdateComponent},
-      {path: 'delete', component: DeleteComponent}
+      { path: 'create', component: CreateComponent },
+      { path: 'read', component: ReadComponent },
+      { path: 'update', component: UpdateComponent },
+      { path: 'delete', component: DeleteComponent }
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatIconModule,
     MatSidenavModule,
-    MatListModule,
     MatButtonModule,
   ],
   declarations: [
@@ -55,7 +53,7 @@ import { DeleteComponent } from './delete/delete.component'
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    CreateComponent,
+    
     ReadComponent,
     UpdateComponent,
     DeleteComponent,
