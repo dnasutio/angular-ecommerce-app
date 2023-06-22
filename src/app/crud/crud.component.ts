@@ -1,31 +1,35 @@
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { MatGridListModule } from '@angular/material/grid-list';
 
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
+import { MatTableModule } from '@angular/material/table';
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
 }
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
+  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
+  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
+  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
+  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+];
 
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.css'],
   standalone: true,
-  imports: [MatGridListModule, NgFor]
+  imports: [MatTableModule]
 })
 export class CrudComponent {
-  tiles: Tile[] = [
-    { text: 'ID', cols: 1, rows: 1, color: 'lightblue' },
-    { text: 'Name', cols: 1, rows: 1, color: 'lightgreen' },
-    { text: 'Price', cols: 1, rows: 1, color: 'lightpink' },
-    { text: 'Description', cols: 1, rows: 1, color: '#DDBDF1' },
-
-    { text: 'v98a7tyv', cols: 1, rows: 1, color: '#DDBDF1' },
-    { text: 'Cat Ears', cols: 1, rows: 1, color: 'lightpink' },
-    { text: '$2.00', cols: 1, rows: 1, color: 'lightblue' },
-    { text: 'They look funny.', cols: 1, rows: 1, color: '#DDBDF1' },
-  ];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = ELEMENT_DATA;
 }
