@@ -22,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreateComponent } from './create/create.component';
 import { ReadComponent } from './read/read.component';
 import { UpdateComponent } from './update/update.component';
-import { DeleteComponent } from './delete/delete.component'
+import { DeleteComponent } from './delete/delete.component';
+import { CrudComponent } from './crud/crud.component'
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DeleteComponent } from './delete/delete.component'
       { path: 'create', component: CreateComponent },
       { path: 'read', component: ReadComponent },
       { path: 'update', component: UpdateComponent },
-      { path: 'delete', component: DeleteComponent }
+      { path: 'delete', component: DeleteComponent },
+      { path: 'crud', component: CrudComponent }
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -53,7 +55,7 @@ import { DeleteComponent } from './delete/delete.component'
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    
+
     ReadComponent,
     UpdateComponent,
     DeleteComponent,
