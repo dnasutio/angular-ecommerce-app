@@ -11,19 +11,18 @@ import { ProductAlertsComponent } from './product-alerts/product-alerts.componen
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CrudComponent } from './crud/crud.component';
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatButtonModule } from '@angular/material/button';
-
-
-
-import { CreateComponent } from './create/create.component';
-import { ReadComponent } from './read/read.component';
-import { UpdateComponent } from './update/update.component';
-import { DeleteComponent } from './delete/delete.component';
-import { CrudComponent } from './crud/crud.component'
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -36,16 +35,17 @@ import { CrudComponent } from './crud/crud.component'
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
-      { path: 'create', component: CreateComponent },
-      { path: 'read', component: ReadComponent },
-      { path: 'update', component: UpdateComponent },
-      { path: 'delete', component: DeleteComponent },
       { path: 'crud', component: CrudComponent }
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   declarations: [
     AppComponent,
@@ -55,10 +55,7 @@ import { CrudComponent } from './crud/crud.component'
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-
-    ReadComponent,
-    UpdateComponent,
-    DeleteComponent,
+    CrudComponent
   ],
   bootstrap: [AppComponent],
 })

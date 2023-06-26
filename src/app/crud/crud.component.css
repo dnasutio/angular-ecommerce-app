@@ -1,9 +1,17 @@
-.container {
-    border: solid;
-    border-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
+.full-width-table {
+  width: 100%;
+}
+
+tr {
+  cursor: pointer;
+}
+
+/* I copy pasted these classes from browser inspector, i tried the simpler looking way but it didn't work so this will have to do */
+.mat-mdc-table .mat-mdc-row:hover, .mat-mdc-table .mat-mdc-footer-row:hover {
+  background-color: lightblue;
+}
+
+
+.mat-mdc-table .mat-mdc-row.selected {
+  background-color: lightblue; /* Change the background color as desired */
 }
