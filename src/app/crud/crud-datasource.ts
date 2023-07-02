@@ -4,7 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
-// TODO: Replace this with your own data model type
+import { Product } from '../products';
+
+/* // TODO: Replace this with your own data model type
 export interface CrudItem {
   name: string;
   id: number;
@@ -33,20 +35,21 @@ const EXAMPLE_DATA: CrudItem[] = [
   { id: 18, name: 'Argon', category: 'red' },
   { id: 19, name: 'Potassium', category: 'green' },
   { id: 20, name: 'Calcium', category: 'red' },
-];
+]; */
 
 /**
  * Data source for the Crud view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class CrudDataSource extends DataSource<CrudItem> {
-  data: CrudItem[] = EXAMPLE_DATA;
+export class CrudDataSource extends DataSource<Product> {
+  data: Product[];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor() {
+  constructor(res_data: Product[]) {
     super();
+    this.data = res_data;
   }
 
   /**
@@ -54,13 +57,13 @@ export class CrudDataSource extends DataSource<CrudItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<CrudItem[]> {
+  connect(): Observable<Product[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
       return merge(observableOf(this.data), this.paginator.page, this.sort.sortChange)
         .pipe(map(() => {
-          return this.getPagedData(this.getSortedData([...this.data ]));
+          return this.getPagedData(this.getSortedData([...this.data]));
         }));
     } else {
       throw Error('Please set the paginator and sort on the data source before connecting.');
@@ -71,13 +74,13 @@ export class CrudDataSource extends DataSource<CrudItem> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect(): void {}
+  disconnect(): void { }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: CrudItem[]): CrudItem[] {
+  private getPagedData(data: Product[]): Product[] {
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -90,7 +93,7 @@ export class CrudDataSource extends DataSource<CrudItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: CrudItem[]): CrudItem[] {
+  private getSortedData(data: Product[]): Product[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -98,8 +101,9 @@ export class CrudDataSource extends DataSource<CrudItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
+        case 'price': return compare(a.price, b.price, isAsc);
         case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        case '_id': return compare(+a._id, +b._id, isAsc);
         default: return 0;
       }
     });

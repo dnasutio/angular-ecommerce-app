@@ -2,7 +2,14 @@ import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { CrudDataSource, CrudItem } from './crud-datasource';
+import { CrudDataSource} from './crud-datasource';
+
+import { ProductsService } from "../products.service";
+
+import { Product } from '../products';
+
+import { lastValueFrom } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-crud',
@@ -12,30 +19,54 @@ import { CrudDataSource, CrudItem } from './crud-datasource';
 export class CrudComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<CrudItem>;
+  @ViewChild(MatTable) table!: MatTable<Product>;
   @HostListener('click', ['$event.target'])
+  products: Product[];
   dataSource: CrudDataSource;
-  selectedRows: CrudItem[] = [];
-  filteredRows: CrudItem[] = [];
+  selectedRows: Product[] = [];
+  filteredRows: Product[] = [];
   selectAllLabel = 'Select All';
   categories: string[] = [];
   selectedCategory: string | undefined;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'category'];
+  displayedColumns = ['id', 'name', 'price', 'description', 'discount', 'stock', 'category'];
 
-  constructor() {
-    this.dataSource = new CrudDataSource();
+  constructor(private productsService: ProductsService) {
+    this.initialize();
+  }
+
+  async initialize() {
+    await this.getProducts();
+    this.dataSource = new CrudDataSource(this.products);
+    //console.log("DATA: ", this.dataSource.data);
     this.categories = this.getDistinctCategories();
   }
 
+  async getProducts(): Promise<void> {
+    try {
+      const response = await lastValueFrom(this.productsService.getProducts().pipe(
+        finalize(() => {
+          // Cleanup or additional actions can be performed here
+        })
+      ));
+  
+      this.products = response.body;
+      console.log("other body ", response.body);
+    } catch (error) {
+      console.log("Something bad happened")
+    }
+  }
+
   ngAfterViewInit(): void {
+    
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    console.log("DATA: ", this.dataSource.data);
     this.table.dataSource = this.dataSource;
   }
 
-  select(row: CrudItem) {
+  select(row: Product) {
     const index = this.selectedRows.indexOf(row);
 
     if (index > -1) {
@@ -48,7 +79,7 @@ export class CrudComponent implements AfterViewInit {
     console.log('Selected rows:', this.selectedRows);
   }
 
-  isRowSelected(row: CrudItem): boolean {
+  isRowSelected(row: Product): boolean {
     return this.selectedRows.includes(row);
   }
 

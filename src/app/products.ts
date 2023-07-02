@@ -1,8 +1,11 @@
 export interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  description: string;
+  _id: string,
+  name: string, 
+  price: number, 
+  description: string, 
+  discount: number, 
+  stock: number, 
+  category: string,
 }
 
 export const products = [
