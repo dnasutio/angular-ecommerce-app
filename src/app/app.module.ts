@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { CrudComponent } from './crud/crud.component';
+import { DialogDataComponent } from './dialog-data/dialog-data.component';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +24,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -45,7 +50,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatSortModule,
     MatTableModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    NgIf,
+    FormsModule,
+    MatDialogModule
   ],
   declarations: [
     AppComponent,
@@ -55,7 +63,8 @@ import { MatSelectModule } from '@angular/material/select';
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    CrudComponent
+    CrudComponent,
+    DialogDataComponent
   ],
   bootstrap: [AppComponent],
 })
