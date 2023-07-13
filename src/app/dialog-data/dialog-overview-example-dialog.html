@@ -1,12 +1,49 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Create a Product</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+
+  <p>Name</p>
   <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
+    <mat-label>ex. Hat</mat-label>
+    <input matInput [(ngModel)]="data.name">
   </mat-form-field>
+  <br>
+
+  <p>Price($)</p>
+  <mat-form-field>
+    <mat-label>ex. 49.99</mat-label>
+    <input matInput [(ngModel)]="data.price">
+  </mat-form-field>
+  <br>
+
+  <p>Description</p>
+  <mat-form-field>
+    <mat-label>ex. For head</mat-label>
+    <input matInput [(ngModel)]="data.description">
+  </mat-form-field>
+  <br>
+
+  <p>Discount(%)</p>
+  <mat-form-field>
+    <mat-label>ex. 13</mat-label>
+    <input matInput [(ngModel)]="data.discount">
+  </mat-form-field>
+  <br>
+
+  <p>Stock</p>
+  <mat-form-field>
+    <mat-label>ex. 1000</mat-label>
+    <input matInput [(ngModel)]="data.stock">
+  </mat-form-field>
+  <br>
+
+  <p>Category</p>
+  <mat-form-field>
+    <mat-label>ex. Headwear</mat-label>
+    <input matInput [(ngModel)]="data.category">
+  </mat-form-field>
+  <br>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirm</button>
 </div>
