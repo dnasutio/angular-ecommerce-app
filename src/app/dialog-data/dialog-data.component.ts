@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { Product } from '../products';
+import { ProductsService } from "../products.service";
 
 export interface DialogData {
   animal: string;
@@ -41,10 +42,7 @@ export class DialogDataComponent {
       height: '800px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log("Result: ", result);
-    });
+
   }
 }
 
@@ -55,12 +53,30 @@ export class DialogDataComponent {
   imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
 })
 export class DialogOverviewExampleDialog {
+  product: Product;
+
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    private productsService: ProductsService,
     @Inject(MAT_DIALOG_DATA) public data: Product,
   ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  createProduct() {
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log("Result: ", result);
+      this.product = result;
+
+      console.log("This ", this.product);
+
+      this.productsService.createProduct(this.product).subscribe(response => {
+        console.log("Product created ", response.body);
+      });
+    });
+  }
+
 }

@@ -16,6 +16,7 @@ export class ProductsService {
     }
 
     createProduct(product: Product): Observable<HttpResponse<any>> {
-        return this.http.post("http://localhost:3000/products", product, { observe: 'response' });
+        console.log("balls", product)
+        return this.http.post("http://localhost:3000/products", product, { observe: 'response', responseType: 'text' });
     }
 }
