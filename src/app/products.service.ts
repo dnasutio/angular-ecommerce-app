@@ -19,4 +19,9 @@ export class ProductsService {
         console.log("balls", product)
         return this.http.post("http://localhost:3000/products", product, { observe: 'response', responseType: 'text' });
     }
+
+    deleteProducts(products: Product[]) {
+        console.log("Send delete ", );
+        return this.http.post("http://localhost:3000/products/deleteProducts", products, { observe: 'response', responseType: 'text' });
+    }
 }

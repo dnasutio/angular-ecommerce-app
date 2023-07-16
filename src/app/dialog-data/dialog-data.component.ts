@@ -8,11 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Product } from '../products';
 import { ProductsService } from "../products.service";
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
 @Component({
   selector: 'app-dialog-data',
   templateUrl: './dialog-data.component.html',
