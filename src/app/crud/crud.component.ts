@@ -2,7 +2,7 @@ import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { CrudDataSource} from './crud-datasource';
+import { CrudDataSource } from './crud-datasource';
 
 import { ProductsService } from "../products.service";
 
@@ -28,6 +28,7 @@ export class CrudComponent implements AfterViewInit {
   selectAllLabel = 'Select All';
   categories: string[] = [];
   selectedCategory: string | undefined;
+  deleteLabel = 'Delete';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'price', 'description', 'discount', 'stock', 'category'];
@@ -50,7 +51,7 @@ export class CrudComponent implements AfterViewInit {
           // Cleanup or additional actions can be performed here
         })
       ));
-  
+
       this.products = response.body;
       console.log("other body ", response.body);
     } catch (error) {
@@ -59,7 +60,7 @@ export class CrudComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     console.log("DATA: ", this.dataSource.data);
@@ -144,4 +145,25 @@ export class CrudComponent implements AfterViewInit {
 
     return categories;
   }
+
+  deleteProducts() {
+    console.log(this.selectedRows)
+    let ids: String[] = [];
+    for (const product of this.selectedRows) {
+      ids.push(product._id);
+    }
+
+    console.log(ids)
+
+    const toBeDeleted = {
+      "products": ids
+    }
+
+    console.log(toBeDeleted)
+
+    this.productsService.deleteProducts(toBeDeleted).subscribe(response => {
+      console.log("Products deleted ", response.body);
+    });
+  }
+
 }

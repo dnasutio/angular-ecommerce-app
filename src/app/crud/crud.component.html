@@ -20,6 +20,10 @@
 
   <app-dialog-data></app-dialog-data>
 
+  <button mat-raised-button color="primary" (click)="deleteProducts()">
+    {{ deleteLabel }}
+  </button>
+
   <table mat-table class="full-width-table" matSort aria-label="Elements">
     <!-- Id Column -->
     <ng-container matColumnDef="id">

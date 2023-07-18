@@ -20,8 +20,8 @@ export class ProductsService {
         return this.http.post("http://localhost:3000/products", product, { observe: 'response', responseType: 'text' });
     }
 
-    deleteProducts(products: Product[]) {
-        console.log("Send delete ", );
+    deleteProducts(products: any) {
+        console.log("Send delete ", products);
         return this.http.post("http://localhost:3000/products/deleteProducts", products, { observe: 'response', responseType: 'text' });
     }
 }
